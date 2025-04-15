@@ -33,7 +33,8 @@
 				angleHistory: [],
 				smoothingWindow: 5,
 				calibrationOffset: 0,
-				isListening: false
+				isListening: false,
+				maxAngle: 60 // 最大角度范围
 			}
 		},
 		onLoad() {
@@ -66,7 +67,7 @@
 							this.angle = sum / this.angleHistory.length
 							
 							// 限制角度范围
-							this.angle = Math.max(-30, Math.min(30, this.angle))
+							this.angle = Math.max(-this.maxAngle, Math.min(this.maxAngle, this.angle))
 							
 							// 更新液体样式
 							this.liquidStyle = {
@@ -142,10 +143,10 @@
 
 	.liquid-container {
 		position: absolute;
-		width: 150%;
-		height: 150%;
-		left: -25%;
-		top: -25%;
+		width: 200%; /* 增加容器宽度以适应更大角度 */
+		height: 200%; /* 增加容器高度以适应更大角度 */
+		left: -50%; /* 调整偏移以保持居中 */
+		top: -50%; /* 调整偏移以保持居中 */
 		transform-origin: center center;
 	}
 
