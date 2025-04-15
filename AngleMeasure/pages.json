@@ -3,15 +3,21 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "水平仪",
+				"navigationStyle": "custom"
 			}
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "水平仪",
+		"navigationBarBackgroundColor": "#000000",
+		"backgroundColor": "#000000"
 	},
-	"uniIdRouter": {}
+	"uniIdRouter": {},
+	"permission": {
+		"scope.deviceMotion": {
+			"desc": "需要使用设备方向功能来测量水平度"
+		}
+	}
 }
