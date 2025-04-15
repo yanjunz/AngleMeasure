@@ -1,51 +1,70 @@
 <template>
-  <div class="level-container">
-    <div class="level-background">
-      <div class="level-indicator" :style="indicatorStyle"></div>
-    </div>
-    <div class="angle-display">
+  <view class="level-container">
+    <view class="level-background">
+      <view class="level-indicator" :style="indicatorStyle"></view>
+    </view>
+    <view class="angle-display">
       {{ angle.toFixed(1) }}°
-    </div>
-  </div>
+    </view>
+    <view class="status-text">{{ statusText }}</view>
+  </view>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-
-const angle = ref(0)
-const indicatorStyle = ref({})
-
-const handleOrientation = (event: DeviceOrientationEvent) => {
-  if (event.beta !== null) {
-    angle.value = event.beta
-    indicatorStyle.value = {
-      transform: `rotate(${angle.value}deg)`
+<script>
+export default {
+  data() {
+    return {
+      angle: 0,
+      indicatorStyle: {},
+      statusText: '请授权设备方向权限'
     }
+  },
+  onLoad() {
+    this.startDeviceMotion()
+  },
+  methods: {
+    startDeviceMotion() {
+      // 开始监听设备方向
+      wx.startDeviceMotionListening({
+        interval: 'game',
+        success: () => {
+          this.statusText = '正在测量...'
+          wx.onDeviceMotionChange((res) => {
+            if (res.beta !== null) {
+              this.angle = res.beta
+              this.indicatorStyle = {
+                transform: `rotate(${this.angle}deg)`
+              }
+              // 当接近水平时显示绿色
+              if (Math.abs(this.angle) < 1) {
+                this.statusText = '水平'
+              } else {
+                this.statusText = '正在测量...'
+              }
+            }
+          })
+        },
+        fail: (err) => {
+          console.error('设备方向检测失败:', err)
+          this.statusText = '设备不支持方向检测'
+        }
+      })
+    }
+  },
+  onUnload() {
+    // 停止监听
+    wx.stopDeviceMotionListening()
   }
 }
-
-onMounted(() => {
-  if (window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', handleOrientation)
-  }
-})
-
-onUnmounted(() => {
-  if (window.DeviceOrientationEvent) {
-    window.removeEventListener('deviceorientation', handleOrientation)
-  }
-})
 </script>
 
-<style scoped lang="scss">
+<style>
 .level-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #000;
-  color: #fff;
 }
 
 .level-background {
@@ -72,5 +91,11 @@ onUnmounted(() => {
   margin-top: 20px;
   font-size: 24px;
   font-weight: bold;
+}
+
+.status-text {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #999;
 }
 </style> 

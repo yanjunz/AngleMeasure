@@ -1,14 +1,8 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { resolve } from 'path'
+import uni from '@dcloudio/vite-plugin-uni'
 
 export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src')
-    }
-  },
+  plugins: [uni()],
   server: {
     port: 3000
   }

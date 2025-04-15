@@ -1,0 +1,21 @@
+{
+  "pages": [
+    {
+      "path": "components/Level",
+      "style": {
+        "navigationBarTitleText": "水平仪"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "水平仪",
+    "navigationBarBackgroundColor": "#000000",
+    "backgroundColor": "#000000"
+  },
+  "permission": {
+    "scope.deviceMotion": {
+      "desc": "需要使用设备方向功能来测量水平度"
+    }
+  }
+} 
