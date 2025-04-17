@@ -3,8 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "水平仪",
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "水平仪"
 			}
 		}
 	],
