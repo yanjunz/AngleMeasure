@@ -25,12 +25,7 @@
 </template>
 
 <script>
-	import Welcome from '../welcome/welcome.vue'
-	
 	export default {
-		components: {
-			Welcome
-		},
 		data() {
 			return {
 				angle: 0,

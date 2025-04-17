@@ -1,6 +1,6 @@
 <template>
 	<view class="welcome-container">
-		<image class="app-logo" src="/static/angle_icon.png" mode="aspectFit"></image>
+		<image class="app-logo" src="../../static/angle_icon.png" mode="aspectFit"></image>
 		<view class="app-title">水平仪</view>
 		<view class="app-description">一个简单实用的水平测量工具</view>
 		<view class="features">
@@ -29,7 +29,7 @@
 		methods: {
 			startMeasuring() {
 				uni.navigateTo({
-					url: '/pages/index/index',
+					url: '/src/pages/index/index',
 					success: () => {
 						console.log('导航成功')
 					},
